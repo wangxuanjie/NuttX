@@ -635,6 +635,14 @@
 #define NVIC_HFAULTS_FORCED             (1 << 30) /* Bit 30: FORCED Mask */
 #define NVIC_HFAULTS_DEBUGEVT           (1 << 31) /* Bit 31: DEBUGEVT Mask */
 
+/* Debug Fault Status Register */
+
+#define NVIC_DFAULTS_HALTED             (1 << 0)  /* Bit 0:  Halted Mask */
+#define NVIC_DFAULTS_BKPT               (1 << 1)  /* Bit 1:  BKPT or FPB Mask */
+#define NVIC_DFAULTS_DWTTRAP            (1 << 2)  /* Bit 2:  DWT Mask */
+#define NVIC_DFAULTS_VCATCH             (1 << 3)  /* Bit 3:  Vector catch Mask */
+#define NVIC_DFAULTS_EXTERNAL           (1 << 4)  /* Bit 4:  External debug request Mask */
+
 /* Cache Level ID register (Cortex-M7) */
 
 #define NVIC_CLIDR_L1CT_SHIFT           (0)      /* Bits 0-2: Level 1 cache type */
@@ -693,6 +701,23 @@
 #  define NVIC_CPACR_CP_DENY(n)         (0 << NVIC_CPACR_CP_SHIFT(n))
 #  define NVIC_CPACR_CP_PRIV(n)         (1 << NVIC_CPACR_CP_SHIFT(n))
 #  define NVIC_CPACR_CP_FULL(n)         (3 << NVIC_CPACR_CP_SHIFT(n))
+
+/* Debug Halting Control and Status Register (DHCSR) */
+
+#define NVIC_DHCSR_C_DEBUGEN            (1 << 0)  /* Bit 0:  Enables debug. */
+#define NVIC_DHCSR_C_HALT               (1 << 1)  /* Bit 1:  Halts the core. */
+#define NVIC_DHCSR_C_STEP               (1 << 2)  /* Bit 2:  Steps the core in halted debug. */
+#define NVIC_DHCSR_C_MASKINTS           (1 << 3)  /* Bit 3:  Mask interrupts when stepping or running in halted debug. */
+#define NVIC_DHCSR_C_SNAPSTALL          (1 << 5)  /* Bit 5:  If the core is stalled on a load/store operation the stall ceases and the instruction is forced to complete. */
+#define NVIC_DHCSR_S_REGRDY             (1 << 16) /* Bit 16: Register Read/Write on the Debug Core Register Selector register is available. */
+#define NVIC_DHCSR_S_HALT               (1 << 17) /* Bit 17: The core is in debug state when S_HALT is set. */
+#define NVIC_DHCSR_S_SLEEP              (1 << 18) /* Bit 18: Indicates that the core is sleeping (WFI, WFE or SLEEP-ON-EXIT). */
+#define NVIC_DHCSR_S_LOCKUP             (1 << 19) /* Bit 19: Reads as one if the core is running (not halted) and a lockup condition is present. */
+#define NVIC_DHCSR_S_RETIRE_ST          (1 << 24) /* Bit 24: Indicates that an instruction has completed since last read. */
+#define NVIC_DHCSR_S_RESET_ST           (1 << 25) /* Bit 25: Indicates that the core has been reset, or is now being reset, since the last time this bit was read. */
+#define NVIC_DHCSR_DBGKEY_SHIFT         (16)      /* Bits 16:31: Key to prevent inadvertent writes. */
+#define NVIC_DHCSR_DBGKEY_MASK          (0xffff << NVIC_DHCSR_DBGKEY_SHIFT)
+#  define NVIC_DHCSR_DBGKEY_VALUE       (0xa05f)
 
 /* Debug Exception and Monitor Control Register (DEMCR) */
 

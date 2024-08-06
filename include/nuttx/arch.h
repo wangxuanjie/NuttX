@@ -90,12 +90,21 @@
  * Pre-processor definitions
  ****************************************************************************/
 
+#define DEBUGPOINT_NONE          0x00
+#define DEBUGPOINT_WATCHPOINT_RO 0x01
+#define DEBUGPOINT_WATCHPOINT_WO 0x02
+#define DEBUGPOINT_WATCHPOINT_RW 0x03
+#define DEBUGPOINT_BREAKPOINT    0x04
+#define DEBUGPOINT_STEPPOINT     0x05
+
 /****************************************************************************
  * Public Types
  ****************************************************************************/
 
 typedef CODE void (*sig_deliver_t)(FAR struct tcb_s *tcb);
 typedef CODE void (*phy_enable_t)(bool enable);
+typedef CODE void (*debug_callback_t)(int type, FAR void *addr, size_t size,
+                                      FAR void *arg);
 
 /****************************************************************************
  * Public Data
