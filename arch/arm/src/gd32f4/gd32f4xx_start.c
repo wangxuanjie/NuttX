@@ -219,7 +219,7 @@ void __start(void)
    * certain that there are no issues with the state of global variables.
    */
 
-  for (dest = (uint32_t *)_sbss; dest < (uint32_t *)_ebss; )
+  for (dest = (uint32_t *)_START_BSS; dest < (uint32_t *)_END_BSS; )
     {
       *dest++ = 0;
     }
@@ -230,8 +230,8 @@ void __start(void)
    * end of all of the other read-only data (.text, .rodata) at _eronly.
    */
 
-  for (src = (const uint32_t *)_eronly,
-       dest = (uint32_t *)_sdata; dest < (uint32_t *)_edata;
+  for (src = (const uint32_t *)_DATA_INIT,
+       dest = (uint32_t *)_START_DATA; dest < (uint32_t *)_END_DATA;
       )
     {
       *dest++ = *src++;
